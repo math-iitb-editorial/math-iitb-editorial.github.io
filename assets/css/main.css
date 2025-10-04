@@ -1,0 +1,102 @@
+:root{
+  --bg: #0c0f14;
+  --card: #151a22;
+  --text: #e6e9ef;
+  --muted: #a7b0bd;
+  --accent: #64d2ff;
+  --accent-contrast: #0b1b26;
+  --border: #1f2630;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+a { color: var(--accent); }
+a:hover { color: #9be5ff; }
+
+.navbar {
+  background: rgba(12, 15, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  background: #0b0e13;
+  color: var(--muted);
+}
+
+/* Buttons */
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: none;
+}
+.btn-accent:hover { filter: brightness(1.08); }
+
+/* Hero */
+.hero {
+  height: 62vh;
+  min-height: 420px;
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.05);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(12,15,20,.9));
+}
+
+/* Cards */
+.card-custom {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card-custom .card-body {
+  color: #f0f3f7;            /* lighter text color */
+}
+.card-custom h3,
+.card-custom h5 {
+  color: #ffffff;            /* brighter headings */
+}
+.card-custom p {
+  color: #cfd8e3;            /* softer grey for summaries */
+}
+.card-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.card-custom .card-img-top {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.card-custom .small a {
+  color: #aad5ff;
+  text-decoration: none;
+}
+.card-custom .small a:hover {
+  text-decoration: underline;
+}
+.card-custom .small i {
+  color: #9be5ff;
+  margin-right: 4px;
+}
+
+
+/* Small text helpers */
+.text-muted { color: var(--muted) !important; }
+
+/* Article container */
+.article-container article {
+  max-width: 820px;
+  line-height: 1.7;
+}

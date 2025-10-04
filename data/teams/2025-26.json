@@ -1,0 +1,26 @@
+{
+  "year": "2025-26",
+  "chief_editor": {
+    "name": "Sahana Jahagaridar",
+    "email": "23b3311@iitb.ac.in",
+    "phone": "+91-75400-99435",
+    "photo": "/assets/img/team/2025-26/chief-editor.jpg",
+    "alt": "Chief Editor portrait"
+  },
+  "editors": [
+    {
+      "name": "Nilabha Saha",
+      "email": "210260037@iitb.ac.in",
+      "phone": "+91-81055-75770",
+      "photo": "/assets/img/team/2025-26/editor-1.jpg",
+      "alt": "Editor One portrait"
+    },
+    {
+      "name": "Souhardya Biswas",
+      "email": "25n0081@iitb.ac.in",
+      "phone": "+91-82408-59650",
+      "photo": "/assets/img/team/2025-26/editor-2.jpg",
+      "alt": "Editor Two portrait"
+    }
+  ]
+}
