@@ -69,9 +69,10 @@
   }
 
   function renderTeamYear(data, isCurrent){
+    const dgsec = data.department_general_secretary ? personCard(data.department_general_secretary, 'Department General Secretary') : '';
     const chief = data.chief_editor ? personCard(data.chief_editor, 'Chief Editor') : '';
     const editors = (data.editors || []).map(e => personCard(e, 'Editor')).join('');
     // For current team, keep chief first; previous years can be compact
-    return `${chief}${editors}`;
+    return `${dgsec}${chief}${editors}`;
   }
 })();

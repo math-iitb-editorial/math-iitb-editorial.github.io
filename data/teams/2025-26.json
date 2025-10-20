@@ -1,7 +1,14 @@
 {
   "year": "2025-26",
+  "department_general_secretary": {
+    "name": "Ujjwal Kumar Mishra",
+    "email": "24n0240@iitb.ac.in",
+    "phone": "+91-63974-45241",
+    "photo": "/assets/img/team/2025-26/department-general-secretary.jpg",
+    "alt": "Department General Secretary portrait"
+  },
   "chief_editor": {
-    "name": "Sahana Jahagaridar",
+    "name": "Sahana Jahagirdar",
     "email": "23b3311@iitb.ac.in",
     "phone": "+91-75400-99435",
     "photo": "/assets/img/team/2025-26/chief-editor.jpg",
