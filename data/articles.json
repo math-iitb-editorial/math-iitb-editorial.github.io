@@ -14,13 +14,5 @@
     "summary": "This article introduces the newest addition to the Mathematics Association - the Editorial Team.",
     "thumbnail": "/assets/img/articles/editorial-team-intro-thumb.jpg",
     "thumb_alt": "Editorial Team Introduction article thumbnail"
-  },
-  {
-    "title": "Pit Stop Analysis in Formula 1 Racing",
-    "slug": "f1-pit-stop-analysis",
-    "date": "2025-10-28",
-    "summary": "This article explores the world of Formula 1 pit stops where milliseconds can change the outcome of the race. It explains the evolution of pit stop speeds, some pit lane tactics and a data-<em>driven</em> analysis based on recent pit stop data provided by the FIA.",
-    "thumbnail": "/assets/img/articles/f1-pit-stop-analysis-thumb.jpg",
-    "thumb_alt": "F1 Pit Stop Analysis article thumbnail"
   }
 ]
