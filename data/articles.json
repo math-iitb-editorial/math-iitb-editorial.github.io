@@ -14,5 +14,13 @@
     "summary": "This article introduces the newest addition to the Mathematics Association - the Editorial Team.",
     "thumbnail": "/assets/img/articles/editorial-team-intro-thumb.jpg",
     "thumb_alt": "Editorial Team Introduction article thumbnail"
+  },
+  {
+    "title": "A Journey Through Mathematics and Academia with Prof. Sutanu Roy",
+    "slug": "prof-sutanu-roy-interview",
+    "date": "2025-12-20",
+    "summary": "An insightful interview with Prof. Sutanu Roy, delving into his academic journery and about research in Mathematics.",
+    "thumbnail": "/assets/img/articles/prof-sutanu-roy-interview-thumb.jpg",
+    "thumb_alt": "Prof. Sutanu Roy Interview article thumbnail"
   }
 ]
