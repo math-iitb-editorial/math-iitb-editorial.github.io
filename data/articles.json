@@ -22,5 +22,13 @@
     "summary": "An insightful interview with Prof. Sutanu Roy, delving into his academic journery and about research in Mathematics.",
     "thumbnail": "/assets/img/articles/prof-sutanu-roy-interview-thumb.jpg",
     "thumb_alt": "Prof. Sutanu Roy Interview article thumbnail"
-  }
+  },
+  {
+    "title": "An Undergraduate's Foray into Combinatorics",
+    "slug": "undergraduate-foray-into-combinatorics",
+    "date": "2026-04-01",
+    "summary": "This article chronicles the journey of an undergraduate student exploring the fascinating world of combinatorics.",
+    "thumbnail": "/assets/img/articles/undergraduate-foray-into-combinatorics-thumb.jpg",
+    "thumb_alt": "Undergraduate Foray into Combinatorics article thumbnail"
+  }  
 ]
