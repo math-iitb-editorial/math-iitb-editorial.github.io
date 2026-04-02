@@ -38,5 +38,13 @@
     "summary": "This article explores the transformative impact of Large Language Models (LLMs) on the field of mathematics, tracing their evolution from generating basic arithmetic to tackling complex Olympiad problems.",
     "thumbnail": "/assets/img/articles/llm-in-math-thumb.jpg",
     "thumb_alt": "LLM in Math article thumbnail"
+  },
+  {
+    "title": "The Students' Seminar",
+    "slug": "students-seminar",
+    "date": "2026-04-03",
+    "summary": "An insightful interview with Aditya Dwivedi, an organiser of the Students' Seminar in the Matheamtics Department.",
+    "thumbnail": "/assets/img/articles/students-seminar-thumb.jpg",
+    "thumb_alt": "Students' Seminar article thumbnail"
   }
 ]
