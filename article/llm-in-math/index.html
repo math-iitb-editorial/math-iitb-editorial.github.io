@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>From Hallucinated Arithmetic to Olympiad Problems — IITB Mathematics Editorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Tracing the arc of large language models in mathematics: from early failures in arithmetic to solving olympiad problems.">
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+</head>
+
+<body>
+    <div id="site-nav"></div>
+
+    <main class="container article-container py-5">
+        <article class="mx-auto">
+            <header class="mb-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <h1 class="display-6 fw-semibold mb-0">
+                        From Hallucinated Arithmetic to Olympiad Problems
+                    </h1>
+                    <div class="ms-auto text-end">
+                        <div class="author-line fw-medium">
+                            Author: <span class="author-name">Nilabha Saha</span>
+                        </div>
+                        <div class="text-muted small">
+                            Published: 2026-04-02
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <p>
+                Large language models (LLMs), the technology behind systems like ChatGPT, Gemini, and Claude,
+                are, at their core, autoregressive next-token predictors: they are trained to predict the next
+                token in a sequence from vast text corpora. There is no built-in notion of number, quantity, or
+                logical entailment in the basic objective. A model that has learnt to write fluent English has
+                not, in any obvious sense, learnt to add. And yet, in roughly four to five years, LLMs went from
+                struggling with basic multi-step arithmetic to solving difficult olympiad problems. In this
+                article, we will trace that arc: the early failures, the benchmarks that defined progress, and
+                some of the techniques that made it happen.
+            </p>
+
+            <p>
+                To understand why maths is hard for LLMs, one must understand how LLMs see numbers. A tokeniser,
+                the component that converts raw text into units the model processes, does not treat "1234" as the
+                number "one thousand, two hundred, and thirty-four"; language models process text as token
+                sequences rather than as explicit symbolic numerals with place-value semantics. Consequently,
+                early GPT-era models such as GPT-2 (released in 2019) and GPT-3 (introduced in 2020) were not
+                reliable multi-digit calculators. GPT-3, for example, showed some ability on small arithmetic
+                tasks but still struggled on robust multi-step reasoning.
+            </p>
+
+            <p>
+                Progress became measurable thanks to two benchmarks. One of them is GSM8K (Cobbe et al., OpenAI,
+                2021), which consists of roughly 8,500 grade-school word problems, with solutions typically
+                requiring between two and eight reasoning steps. The other, substantially harder benchmark, is
+                MATH (Hendrycks et al., 2021): a dataset of 12,500 competition-style mathematics problems with
+                full step-by-step solutions. When MATH was introduced, the paper emphasised that accuracy
+                remained low even for very large transformer models. These two benchmarks, one testing elementary
+                multi-step reasoning and the other much more advanced mathematical problem solving, became
+                standard yardsticks for subsequent work.
+            </p>
+
+            <h2 class="h2 mt-4">Prompting and Inference-Time Techniques</h2>
+
+            <p>
+                The first major breakthrough was chain-of-thought (CoT) prompting, introduced by Wei et al. in
+                2022. The idea is that instead of asking the model to jump straight from question to answer, you
+                prompt it to produce intermediate reasoning steps. The original paper showed that, for
+                sufficiently large models, this can dramatically improve performance on arithmetic and reasoning
+                benchmarks, including GSM8K. The belief is that the model uses its own generated text as a kind
+                of external working memory, turning one hard inference into a sequence of easier ones.
+                Effectively, the model is being pushed to produce something closer to a proof trace rather than
+                merely a final claim.
+            </p>
+
+            <p>
+                A natural extension is self-consistency decoding (Wang et al., 2022): instead of taking one
+                greedy reasoning chain, the model samples many reasoning paths and selects the most consistent
+                final answer across them. The self-consistency paper reported substantial gains on multiple
+                reasoning benchmarks, including a large boost on GSM8K.
+            </p>
+
+            <p>
+                A complementary idea, scratchpad training, appeared in Nye et al.'s 2021 paper
+                <a href="https://arxiv.org/abs/2112.00114" target="_blank" rel="noopener"><em>Show Your Work:
+                Scratchpads for Intermediate Computation with Language Models</em></a>. Instead of relying only
+                on prompting at inference time, the model is trained on examples where intermediate computation
+                is written out explicitly. The paper shows that transformers can learn to emit intermediate states
+                for multi-step computation, effectively using the output sequence as a scratchpad. Akin to how
+                forcing students to write out their work often improves performance, this method improved the
+                models' performance.
+            </p>
+
+            <h2 class="h2 mt-4">Verification and Tool Use</h2>
+
+            <p>
+                The asymmetry between verification and generation, infamous in the complexity theory community
+                (cue P = NP?), proved enormously useful. Cobbe et al. (2021) introduced a verifier-based setup
+                in which many candidate solutions are generated and a trained verifier selects the best one.
+                Their results showed that verification significantly improves performance on multi-step word
+                problems. Process reward models (PRMs), developed further in Lightman et al.'s 2023 paper
+                <a href="https://arxiv.org/abs/2305.20050" target="_blank" rel="noopener"><em>Let's Verify Step
+                by Step</em></a>, refine this idea by supervising and evaluating intermediate steps rather than
+                only final answers. That paper reported that process supervision outperformed outcome supervision
+                on MATH-style reasoning tasks.
+            </p>
+
+            <p>
+                Perhaps the most pragmatic advance was tool-augmented generation: allowing the model to write and
+                run code instead of doing all arithmetic internally. OpenAI rolled out Code Interpreter to
+                ChatGPT users in beta in July 2023. In this setup, the model can decompose a problem in natural
+                language, invoke a deterministic computational tool such as Python, and then interpret the result.
+                This sidesteps many weaknesses of pure token-based arithmetic and also generalises beyond
+                arithmetic to symbolic and numerical computation.
+            </p>
+
+            <h2 class="h2 mt-4">Specialised Training</h2>
+
+            <p>
+                A related discovery was that training on technical material, including code and scientific text,
+                improves mathematical reasoning. Minerva, released by Google Research in 2022, fine-tuned a large
+                language model on technical content and achieved state-of-the-art performance on a range of
+                quantitative reasoning benchmarks. The project showed that specialised training data can
+                substantially improve mathematical and scientific problem solving even without external tools.
+                Later open efforts such as WizardMath (2023) and MetaMath (2023) pushed further by using
+                synthetic data generation, data augmentation, and filtered self-generated training data to
+                improve mathematical reasoning in open models.
+            </p>
+
+            <p>
+                The release of GPT-4 in March 2023 marked another clear jump in capability. OpenAI's technical
+                report documented strong performance across many academic and professional benchmarks, including
+                AP Calculus BC. By the middle of 2023, the question had begun to shift from whether LLMs could do
+                useful mathematics at all to how far the new techniques could carry them.
+            </p>
+
+            <h2 class="h2 mt-4">Test-Time Compute and Olympiad Territory</h2>
+
+            <p>
+                One of the most significant recent paradigm shifts was test-time compute scaling, exemplified by
+                OpenAI's o1 family, first introduced in September 2024. OpenAI described o1 as a
+                reasoning-oriented model trained to spend more time thinking before responding, using
+                reinforcement learning to improve complex reasoning performance. Instead of expecting all
+                reasoning ability to be compressed into a single fast pass, the system is allowed to allocate
+                more inference-time computation to harder problems. OpenAI publicly highlighted strong gains on
+                difficult benchmarks such as AIME and described older benchmarks like GSM8K and MATH as becoming
+                less discriminative at the frontier. Akin to maths done by humans, hard problems are often solved
+                not by instant insight but by trying approaches, checking cases, backtracking, and refining an
+                argument.
+            </p>
+
+            <p>
+                At the frontier, DeepMind's
+                <a href="https://deepmind.google/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/"
+                   target="_blank" rel="noopener">AlphaGeometry</a> and AlphaProof pushed mathematical AI into
+                olympiad territory in 2024. AlphaGeometry was introduced in early 2024 as a system for Euclidean
+                geometry that combines neural components with symbolic deduction, and DeepMind reported
+                performance near the level of gold medalists on historical IMO geometry problems. Later that
+                year, DeepMind announced AlphaProof, a reinforcement-learning-based system for formal
+                mathematical reasoning, together with AlphaGeometry 2; the combined system
+                <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/"
+                   target="_blank" rel="noopener">solved four out of six IMO 2024 problems and reached
+                silver-medal standard</a>.
+            </p>
+
+            <h2 class="h2 mt-4">Towards Open Problems</h2>
+
+            <p>
+                Beyond solving known problems, LLM-based systems have also begun contributing to genuinely open
+                ones. The first major example was DeepMind's FunSearch in late 2023: an evolutionary system that
+                paired a code-generating LLM with an automated evaluator. Applied to the cap set problem, a
+                long-standing challenge in extremal combinatorics, FunSearch discovered new constructions
+                surpassing the best previously known results. In late 2025, Terence Tao and collaborators
+                published a systematic study using DeepMind's AlphaEvolve, an LLM-powered evolutionary coding
+                agent, on 67 problems spanning analysis, combinatorics, geometry, and number theory. AlphaEvolve
+                rediscovered the best known results on most problems and improved the state of the art on
+                several, including new constructions in combinatorial geometry. Two separate research papers by
+                Tao followed directly from patterns that AlphaEvolve revealed but could not itself prove. As Tao
+                noted, AlphaEvolve excels at discovering "constructions that were already within reach of current
+                mathematics, but had not yet been discovered due to the amount of time and effort required."
+                Perhaps the most vivid recent example came in early 2026, when Donald Knuth published a short
+                paper titled
+                <a href="https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf" target="_blank"
+                   rel="noopener">"Claude's Cycles."</a>
+                Knuth had been working on a directed Hamiltonian cycle decomposition problem for a future volume
+                of <em>The Art of Computer Programming</em>, with no general construction known. His colleague
+                Filip Stappers fed the problem to Claude Opus 4.6, which, over 31 explorations in roughly one
+                hour, tried and discarded several approaches before arriving at a working construction for all
+                odd values of the parameter. Knuth then wrote the rigorous proof himself. He opened the paper
+                with "Shock! Shock!" and wrote that he would "have to revise my opinions about generative AI." In
+                all three cases, the pattern is the same: the LLM generates candidate constructions at a scale
+                and speed that humans cannot match, but the verification, the proof, and the deeper understanding
+                remain firmly human responsibilities.
+            </p>
+
+            <p>
+                These systems are best understood not as artificial mathematicians in the full human sense, but as
+                increasingly powerful and still imperfect tools. LLMs can be excellent study aids, capable of
+                generating examples, sketches, and alternative approaches, but they can also short-circuit the
+                productive struggle that real mathematical learning requires. Note that the story is far from
+                over: there are central open questions concerning reliability, formal integration, and whether
+                these systems will eventually move from competent recombination to genuinely new mathematics.
+            </p>
+        </article>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+</body>
+
+</html>

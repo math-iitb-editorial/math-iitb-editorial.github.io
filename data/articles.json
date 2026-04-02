@@ -30,5 +30,13 @@
     "summary": "This article chronicles the journey of an undergraduate student exploring the fascinating world of combinatorics.",
     "thumbnail": "/assets/img/articles/undergraduate-foray-into-combinatorics-thumb.jpg",
     "thumb_alt": "Undergraduate Foray into Combinatorics article thumbnail"
-  }  
+  },
+  {
+    "title": "From Hallucinated Arithmetic to Olympiad Probelms.",
+    "slug": "llm-in-math",
+    "date": "2026-04-02",
+    "summary": "This article explores the transformative impact of Large Language Models (LLMs) on the field of mathematics, tracing their evolution from generating basic arithmetic to tackling complex Olympiad problems.",
+    "thumbnail": "/assets/img/articles/llm-in-math-thumb.jpg",
+    "thumb_alt": "LLM in Math article thumbnail"
+  }
 ]
