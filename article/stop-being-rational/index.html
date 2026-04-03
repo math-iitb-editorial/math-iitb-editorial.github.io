@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Stop Being Rational — IITB Mathematics Editorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="An exploration of game theory's Price of Anarchy, showing how individual rationality can harm collective welfare.">
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+
+    <!-- MathJax -->
+    <script>
+    MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']] } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    <!-- TikZJax -->
+    <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+    <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+</head>
+
+<body>
+    <div id="site-nav"></div>
+
+    <main class="container article-container py-5">
+        <article class="mx-auto">
+            <header class="mb-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <h1 class="display-6 fw-semibold mb-0">
+                        Stop Being Rational
+                    </h1>
+                    <div class="ms-auto text-end">
+                        <div class="author-line fw-medium">
+                            Author: <span class="author-name">Aditya Khambete</span>
+                        </div>
+                        <div class="text-muted small">
+                            Published: 2026-04-03
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <blockquote class="blockquote border-start border-4 ps-3 my-4 fst-italic">
+                "Freedom in a commons brings ruin to all."
+                <footer class="blockquote-footer mt-1">Garrett Hardin, <cite>The Tragedy of the Commons</cite></footer>
+            </blockquote>
+
+            <p>
+                Adam Smith famously argued that individuals working in their own self-interest are guided by an
+                "invisible hand" to promote the overall good of society. This is a beautiful idea
+                philosophically, but mathematically, it is completely wrong.
+            </p>
+            <p>
+                Economists like to imagine a hypothetical species <em>Homo economicus</em>, a species of
+                perfectly rational individuals who always make the most optimal decision for themselves. But if we
+                pack a bunch of these individuals together, we do not get a utopian world&mdash;they actually
+                create a gridlocked, crumbling dystopia.
+            </p>
+            <p>
+                In game theory, this gap between what is best for the individual and what is best for the group
+                is measurable. Scientists call this the <em>Price of Anarchy</em>. Informally, it measures how
+                much individual rationality harms the collective society.
+            </p>
+            <p>
+                Let us walk through this journey of selfishness and learn why rationality is stupid.
+            </p>
+
+            <h2 class="h2 mt-4">The Cost of Mistrust</h2>
+            <p>
+                This is one of the classic examples of how rationality backfires. Imagine two criminals get
+                interrogated in separate rooms. They can either <strong>cooperate</strong> (C) by staying silent,
+                or they can <strong>defect</strong> (D) by ratting the other out.
+            </p>
+
+            <div class="table-responsive my-4">
+                <table class="table table-bordered text-center mx-auto" style="max-width: 480px; --bs-table-bg: transparent; --bs-table-color: #fff; --bs-table-border-color: #fff;">
+                    <thead>
+                        <tr>
+                            <th colspan="2" rowspan="2"></th>
+                            <th colspan="2">Player 2</th>
+                        </tr>
+                        <tr>
+                            <th>Cooperate (C)</th>
+                            <th>Defect (D)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th rowspan="2" class="align-middle">Player 1</th>
+                            <th>Cooperate (C)</th>
+                            <td>$(2,\;2)$</td>
+                            <td>$(5,\;1)$</td>
+                        </tr>
+                        <tr>
+                            <th>Defect (D)</th>
+                            <td>$(1,\;5)$</td>
+                            <td>$(4,\;4)$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Clearly, there are three possible outcomes:
+            </p>
+            <ul>
+                <li><strong>Both cooperate:</strong> Neither of them confesses, so both get 2 years in prison
+                    each.</li>
+                <li><strong>Both defect:</strong> They both rat each other out and get 4 years each.</li>
+                <li><strong>One defects, one cooperates:</strong> The one who defects gets only 1 year, but the
+                    silent one gets thrown under the bus and receives 5 years.</li>
+            </ul>
+
+            <p>
+                Now let us see how a <em>Homo economicus</em> would solve this problem. Say Alice is sitting in
+                her cell, thinking about what Bob would do:
+            </p>
+            <ul>
+                <li><strong>If Bob defects:</strong> Alice stays silent and gets 5 years. If she rats him out,
+                    she gets 4 years. Defecting is clearly better.</li>
+                <li><strong>If Bob cooperates:</strong> Alice cooperates and gets 2 years. If she rats him out,
+                    she gets only 1 year. Defecting is clearly better.</li>
+            </ul>
+
+            <p>
+                We can apply the exact same argument to Bob, and we realise that the optimal outcome under
+                rational play is $(D, D)$, where both face 4 years in prison. Had they decided to be a little
+                less rational and kept their mouths shut, they would have been out in 2 years.
+            </p>
+            <p>
+                This tragic optimal outcome is called the <em>Nash Equilibrium</em>: a position from which no
+                player would want to change their action, given that no one else moves. For example, if Alice
+                switches from D to C while Bob stays at D, Alice gets 5 years instead of 4. She has no incentive
+                to change.
+            </p>
+            <p>
+                To measure how terrible this outcome is, we define the <em>Price of Anarchy</em> (PoA):
+            </p>
+            \[
+                \text{PoA} = \frac{\text{Cost of the worst Nash Equilibrium}}{\text{Cost of the social optimum}}
+            \]
+            <p>
+                A natural question arises: how do we actually measure this social cost? A <em>welfare
+                function</em> aggregates individual costs to calculate the societal cost. A natural choice is to
+                sum all the individual costs; this is called the <em>utilitarian</em> welfare function. Another
+                choice is to take the maximum of the individual costs; this is called the <em>egalitarian</em>
+                welfare function. There are other choices (such as the product of costs), but we will not go into
+                those. For the rest of this article, we will use the utilitarian welfare function.
+            </p>
+            <p>
+                Naturally, it is easy to see that $\text{PoA} \geq 1$. If $\text{PoA} = 1$, then the worst Nash
+                Equilibrium is actually the social optimum&mdash;the "invisible hand" genuinely guides us to the
+                optimal outcome. But if $\text{PoA} > 1$, selfishness actively harms society.
+            </p>
+            <p>
+                For instance, in the Prisoner's Dilemma, the social optimum is when both cooperate at $(2,2)$,
+                giving a social welfare cost of $2 + 2 = 4$. The cost at equilibrium is $4 + 4 = 8$, so
+                $\text{PoA} = 2$. We end up in a situation twice as bad due to selfishness.
+            </p>
+
+            <h2 class="h2 mt-4">A Failure to Build</h2>
+            <p>
+                Now imagine a society of $k$ individuals. They all live in suburbs
+                ($s_1, s_2, \ldots, s_k$) and want to reach the city centre ($t$). They have two choices: either
+                build their own private path, or chip in and build a multi-lane public highway.
+            </p>
+
+            <figure class="my-4 text-center">
+                <script type="text/tikz">
+                \begin{tikzpicture}[scale=1.2, color=white, every node/.style={circle, draw=white, text=white, minimum size=0.7cm, inner sep=1pt}]
+                    % Nodes
+                    \node (t) at (0, 3) {$t$};
+                    \node (s1) at (-4, 0) {$s_1$};
+                    \node (s2) at (-2, 0) {$s_2$};
+                    \node (sk1) at (2, 0) {$s_{k\text{-}1}$};
+                    \node (sk) at (4, 0) {$s_k$};
+                    \node (v) at (0, -2) {$v$};
+
+                    % Dots flanking the central arrow
+                    \node[draw=none, minimum size=0pt] at (-0.5, 0) {$\cdots$};
+                    \node[draw=none, minimum size=0pt] at (0.5, 0) {$\cdots$};
+
+                    % Private paths (top, direct to t)
+                    \draw[->, thick] (s1) -- node[draw=none, above left, pos=0.5, font=\small] {$\frac{1}{1}$} (t);
+                    \draw[->, thick] (s2) -- node[draw=none, left, pos=0.5, font=\small] {$\frac{1}{2}$} (t);
+                    \draw[->, thick] (sk1) -- node[draw=none, right, pos=0.5, font=\small] {$\frac{1}{k-1}$} (t);
+                    \draw[->, thick] (sk) -- node[draw=none, above right, pos=0.5, font=\small] {$\frac{1}{k}$} (t);
+
+                    % Public path label (offset to the left of the v->t arrow)
+                    \node[draw=none, minimum size=0pt, font=\small] at (-0.4, 1.2) {$1+\epsilon$};
+
+                    % Public paths (bottom, through v)
+                    \draw[->, thick] (s1) -- node[draw=none, below, pos=0.5, font=\small] {$0$} (v);
+                    \draw[->, thick] (s2) -- node[draw=none, below, pos=0.5, font=\small] {$0$} (v);
+                    \draw[->, thick] (sk1) -- node[draw=none, below, pos=0.5, font=\small] {$0$} (v);
+                    \draw[->, thick] (sk) -- node[draw=none, below, pos=0.5, font=\small] {$0$} (v);
+                    \draw[->, thick] (v) -- (t);
+                \end{tikzpicture}
+                </script>
+            </figure>
+
+            <ul>
+                <li><strong>Private path:</strong> Player $i$ can build a direct path at a cost of $1/i$, but
+                    this must be paid entirely by themselves.</li>
+                <li><strong>Public path:</strong> Players can chip in to build a highway. Whoever contributes
+                    splits the bill of $1 + \epsilon$ equally.</li>
+            </ul>
+
+            <p>
+                We claim that everyone choosing their private path is a Nash Equilibrium. Anyone who moves
+                unilaterally to the public path must bear the entire cost of $1 + \epsilon$, which is always more
+                than the $1/k$ they would otherwise pay, for any positive $\epsilon$ and any
+                $k \in \mathbb{N}$.
+            </p>
+            <p>
+                It is an easy exercise to verify that this is the only equilibrium. The total cost at equilibrium
+                becomes $1 + \tfrac{1}{2} + \tfrac{1}{3} + \cdots + \tfrac{1}{k}$. This is just the $k$-th
+                harmonic sum, so let us denote it by $H_k$. If we want to optimise for society's benefit,
+                building only the public highway makes sense, which costs everyone an equal share of
+                $1 + \epsilon$, giving a societal cost of precisely $1 + \epsilon$.
+            </p>
+            <p>
+                So we have:
+            </p>
+            \[
+                \text{PoA} = \frac{H_k}{1 + \epsilon}
+            \]
+            <p>
+                It is a fundamental fact that $H_k$ diverges, and since $\epsilon$ is in our control, we can
+                make the PoA arbitrarily large with an appropriate $k$. We have created a system where
+                selfishness can lead to <em>infinitely</em> worse outcomes for society.
+            </p>
+
+            <h2 class="h2 mt-4">The Jam of the Damned</h2>
+            <p>
+                The previous section showed us that "rational" people would not let us build nice things. But now
+                suppose the roads already exist. Imagine 1000 drivers want to go from point $A$ to point $B$.
+                There are two paths:
+            </p>
+
+            <figure class="my-4 text-center">
+                <script type="text/tikz">
+                \begin{tikzpicture}[scale=1.4, color=white, every node/.style={circle, draw=white, text=white, minimum size=0.8cm, inner sep=2pt}]
+                    \node (A) at (0, 0) {$A$};
+                    \node (B) at (4, 0) {$B$};
+
+                    \draw[->, thick, bend left=40] (A) to node[draw=none, above, font=\small] {$c(x) = x$} (B);
+                    \draw[->, thick, bend right=40] (A) to node[draw=none, below, font=\small] {$c(x) = 1$} (B);
+                \end{tikzpicture}
+                </script>
+            </figure>
+
+            <ul>
+                <li><strong>Highway (top):</strong> Travel time worsens the more cars use it; $c(x) = x$, where
+                    $x$ is the fraction of users on this path.</li>
+                <li><strong>The backroad (bottom):</strong> A bumpy dirt road that always takes exactly 1 hour,
+                    no matter how many people use it; $c(x) = 1$.</li>
+            </ul>
+
+            <p>
+                Every selfish driver wants the fastest route, so everyone ends up taking the highway until it is
+                jammed and everyone needs 1 hour.
+            </p>
+            <p>
+                To calculate the social optimum, suppose a fraction $f$ uses the highway. The societal cost
+                becomes:
+            </p>
+            \[
+                C = f \cdot f + (1 - f) \cdot 1 = 1 - f + f^2
+            \]
+            <p>
+                Taking the derivative and setting it to zero, we find $f = \tfrac{1}{2}$ is the optimal fraction,
+                which minimises the social cost to $\tfrac{3}{4}$. The cost at equilibrium is 1. So we get:
+            </p>
+            \[
+                \text{PoA} = \frac{1}{3/4} = \frac{4}{3}
+            \]
+            <p>
+                Even in this case, we have 33% extra inefficiency due to drivers being rational.
+            </p>
+
+            <h2 class="h2 mt-4">Braess's Paradox</h2>
+            <p>
+                We have seen enough to convince ourselves that selfish behaviour causes traffic. Surely the
+                solution is to build more roads, right?
+            </p>
+            <p>
+                Wrong. That is Braess's Paradox.
+            </p>
+            <p>
+                Imagine the following network. A large number of drivers have to go from $S$ to $T$:
+            </p>
+
+            <figure class="my-4 text-center">
+                <script type="text/tikz">
+                \begin{tikzpicture}[scale=1.4, color=white, every node/.style={circle, draw=white, text=white, minimum size=0.8cm, inner sep=2pt}]
+                    \node (S) at (0, 0) {$S$};
+                    \node (A) at (2, 1.5) {$A$};
+                    \node (B) at (2, -1.5) {$B$};
+                    \node (T) at (4, 0) {$T$};
+
+                    \draw[->, thick] (S) -- node[draw=none, above left, font=\small] {$c(x) = x$} (A);
+                    \draw[->, thick] (A) -- node[draw=none, above right, font=\small] {$c(x) = 1$} (T);
+                    \draw[->, thick] (S) -- node[draw=none, below left, font=\small] {$c(x) = 1$} (B);
+                    \draw[->, thick] (B) -- node[draw=none, below right, font=\small] {$c(x) = x$} (T);
+                \end{tikzpicture}
+                </script>
+            </figure>
+
+            <p>
+                Right now both paths are symmetric, so the equilibrium is an equal split. The cost to society
+                becomes:
+            </p>
+            \[
+                C = \left(1 + \tfrac{1}{2}\right) \cdot \tfrac{1}{2}
+                  + \left(1 + \tfrac{1}{2}\right) \cdot \tfrac{1}{2}
+                  = \frac{3}{2}
+            \]
+            <p>
+                Now suppose the city planner decides to be helpful and creates an ultra-fast, zero-cost bridge
+                from point $A$ to point $B$:
+            </p>
+
+            <figure class="my-4 text-center">
+                <script type="text/tikz">
+                \begin{tikzpicture}[scale=1.4, color=white, every node/.style={circle, draw=white, text=white, minimum size=0.8cm, inner sep=2pt}]
+                    \node (S) at (0, 0) {$S$};
+                    \node (A) at (2, 1.5) {$A$};
+                    \node (B) at (2, -1.5) {$B$};
+                    \node (T) at (4, 0) {$T$};
+
+                    \draw[->, thick] (S) -- node[draw=none, above left, font=\small] {$c(x) = x$} (A);
+                    \draw[->, thick] (A) -- node[draw=none, above right, font=\small] {$c(x) = 1$} (T);
+                    \draw[->, thick] (S) -- node[draw=none, below left, font=\small] {$c(x) = 1$} (B);
+                    \draw[->, thick] (B) -- node[draw=none, below right, font=\small] {$c(x) = x$} (T);
+                    \draw[->, thick, dashed] (A) -- node[draw=none, right, font=\small] {$c(x) = 0$} (B);
+                \end{tikzpicture}
+                </script>
+            </figure>
+
+            <p>
+                A new shortcut opens up. For any single individual, taking the first half of the upper path and
+                then using the bridge to the second half of the lower path is the best option. Since everyone
+                reasons this way, everyone uses the shortcut, and the total cost becomes
+                $1 + 1 = 2$&mdash;which is worse than our earlier cost of $\tfrac{3}{2}$.
+            </p>
+            <p>
+                Notice that we have added a new, magically fast road, and yet every person's commute has gotten
+                worse.
+            </p>
+
+            <h2 class="h2 mt-4">Conclusion</h2>
+            <p>
+                The "invisible hand" that Adam Smith pointed out is deeply flawed when faced with shared
+                resources among multiple agents. We often view centralised coordination as an abuse of authority.
+                But game theory suggests otherwise. Sometimes restricting choices is not oppression&mdash;it is a
+                mathematical necessity to save us from our own rationality.
+            </p>
+        </article>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+</body>
+
+</html>

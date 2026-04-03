@@ -25,3 +25,15 @@
 .author-name {
   color: #64d2ff;
 }
+
+/* Centre TikZJax rendered diagrams */
+.article-container figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.article-container figure svg,
+.article-container figure img {
+  max-width: 100%;
+  height: auto;
+}
