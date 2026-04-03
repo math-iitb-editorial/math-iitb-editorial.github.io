@@ -54,5 +54,13 @@
     "summary": "An insightful interview with Aditya Dwivedi, an organiser of the Students' Seminar in the Matheamtics Department.",
     "thumbnail": "/assets/img/articles/students-seminar-thumb.jpg",
     "thumb_alt": "Students' Seminar article thumbnail"
+  },
+  {
+    "title": "Sitting Down with the Undergradute Representative",
+    "slug": "ugrep-interview",
+    "date": "2026-04-04",
+    "summary": "An interview with the Undergraduate Representative of the Mathematics department at IIT Bombay, discussing the role, its challenges, and contributions.",
+    "thumbnail": "/assets/img/articles/ugrep-interview-thumb.jpg",
+    "thumb_alt": "Undergraduate Representative Interview article thumbnail"
   }
 ]
