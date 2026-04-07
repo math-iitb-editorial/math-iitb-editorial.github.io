@@ -64,7 +64,15 @@
     "thumb_alt": "Undergraduate Representative Interview article thumbnail"
   },
   {
-    "title": "Life of a PhD — Adventure into Academia",
+    "title": "Mathematics D-AMP",
+    "slug": "mathematics-damp",
+    "date": "2026-04-07",
+    "summary": "An overview of the Department Academic Mentorship Program (D-AMP) of the Mathematics Department at IIT Bombay.",
+    "thumbnail": "/assets/img/articles/mathematics-damp-thumb.jpg",
+    "thumb_alt": "Mathematics D-AMP article thumbnail"
+  },
+  {
+    "title": "Life of a &Pi;hD — Adventure into Academia",
     "slug": "umesh-interview",
     "date": "2026-04-07",
     "summary": "An interview with Umesh Shankar, a former PhD student in the Mathematics department at IIT Bombay, on his research journey, collaboration, and advice for aspiring researchers.",
