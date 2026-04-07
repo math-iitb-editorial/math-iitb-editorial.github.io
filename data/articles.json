@@ -64,9 +64,17 @@
     "thumb_alt": "Undergraduate Representative Interview article thumbnail"
   },
   {
+    "title": "Life of a PhD — Adventure into Academia",
+    "slug": "umesh-interview",
+    "date": "2026-04-07",
+    "summary": "An interview with Umesh Shankar, a PhD student in the Mathematics department at IIT Bombay, on his research journey, collaboration, and advice for aspiring researchers.",
+    "thumbnail": "/assets/img/articles/umesh-interview-thumb.jpg",
+    "thumb_alt": "Umesh Shankar Interview article thumbnail"
+  },
+  {
     "title": "In Conversation with the Department General Secretary",
     "slug": "dgsec-interview",
-    "date": "2026-04-05",
+    "date": "2026-04-07",
     "summary": "An interview with the Department General Secretary of the Mathematics department at IIT Bombay, discussing the role, its challenges, and contributions.",
     "thumbnail": "/assets/img/articles/dgsec-interview-thumb.jpg",
     "thumb_alt": "Department General Secretary Interview article thumbnail"
