@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>The Magic of Error-Correcting Codes — IITB Mathematics Editorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="A gentle tour through coding theory, from repetition codes and Shannon's insight to Reed-Solomon codes and the math inside QR codes.">
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+
+    <!-- MathJax -->
+    <script>
+    MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']] } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+
+<body>
+    <div id="site-nav"></div>
+
+    <main class="container article-container py-5">
+        <article class="mx-auto">
+            <header class="mb-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <h1 class="display-6 fw-semibold mb-0">
+                        The Magic of Error-Correcting Codes
+                    </h1>
+                    <div class="ms-auto text-end">
+                        <div class="author-line fw-medium">
+                            Author: <span class="author-name">Nirav Bhattad</span>
+                        </div>
+                        <div class="text-muted small">
+                            Published: 2026-04-15
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <p>
+                Think about hitting "send" on an assignment over a fluctuating campus Wi-Fi. You are sending out
+                a stream of 0s and 1s, but the real world gets in the way. Bad signals, static, and even
+                scratches on a disk cause errors, which we call noise. Without rigorous math to protect it, that
+                noise would ruin all your files instantly during transmission. A flipped bit doesn't just make a
+                typo; it corrupts the whole thing. Coding theory is the math of packing data so it survives this
+                mess. It isn't about hiding secrets &mdash; that is cryptography. It is about making sure the
+                message you send is exactly the one received.
+            </p>
+
+            <h2 class="h2 mt-4">The Basic Fix and Shannon's Big Idea</h2>
+            <p>
+                Say there is a small chance, $p$, that any bit flips. The easy fix is just repeating yourself.
+                Send <code>111</code> instead of <code>1</code>. If the receiver gets <code>101</code>, they take
+                a majority vote and guess the answer is <code>1</code>. This "Repetition Code" works, but it is
+                super slow. You waste so much space on extra bits. Back in 1948, Claude Shannon proved something
+                extremely incredible: you don't have to slow down your data rate to get perfect accuracy, as long
+                as you encode things smartly. But Shannon didn't say how to build these codes. For that, we need
+                linear algebra.
+            </p>
+
+            <h2 class="h2 mt-4">Enter the Vector Space</h2>
+            <p>
+                Instead of just a string of bits, let's treat our message as a vector $m$ in a $k$-dimensional
+                space, $\mathbb{F}_2^k$. We are working in a finite field with two elements, where math is just
+                modulo 2 (so $1 + 1 = 0$). We want to stretch this $k$-bit message into a longer, $n$-bit
+                codeword $c \in \mathbb{F}_2^n$. Those extra $n - k$ bits are our armor. A Linear Code is simply
+                a $k$-dimensional subspace of $\mathbb{F}_2^n$. Because it is a subspace, it has a basis. We put
+                these basis vectors into a matrix $G$. Encoding is just multiplying:
+            </p>
+            \[
+                c = mG
+            \]
+            <p>
+                How does this fix errors? A subspace also has a null space, given by a parity-check matrix $H$.
+                A vector $c$ is a valid codeword only if:
+            </p>
+            \[
+                Hc^T = 0
+            \]
+            <p>
+                If noise adds an error vector $e$, the receiver gets $y = c + e$. To spot the error, they
+                multiply by $H$:
+            </p>
+            \[
+                Hy^T = H(c + e)^T = Hc^T + He^T = 0 + He^T = He^T
+            \]
+            <p>
+                This result, $He^T$, is called the <strong>syndrome</strong>. It depends only on the error, not
+                the message. By checking the syndrome, in most cases we can figure out the exact error $e$,
+                subtract it, and get our real message back.
+            </p>
+
+            <h2 class="h2 mt-4">Spheres of Data and Hamming Distance</h2>
+            <p>
+                How do we actually know if a system is strong enough to fix a certain number of errors? We have
+                to measure the empty space between our valid codewords. In coding theory, we don't use a ruler;
+                we use Hamming distance. The Hamming distance between two strings of bits is simply the number
+                of spots where they differ. For example, <code>000</code> and <code>011</code> have a distance
+                of $2$.
+            </p>
+            <p>
+                To guarantee we can correct exactly $t$ errors, the minimum distance between any two valid
+                codewords in our entire system must be at least $2t + 1$. Think of it like drawing a geometric
+                bubble around every valid message. If you want a code that safely fixes up to $3$ flipped bits,
+                you draw a sphere of radius $3$ around each codeword. As long as the centers of these spheres
+                are at least $7$ steps apart ($2 \times 3 + 1$), the bubbles will never overlap.
+            </p>
+            <p>
+                When noise corrupts a message in transit, it knocks the codeword off its exact center, but it
+                stays trapped inside its original bubble. The receiver just looks at the messy string of bits
+                they received, checks which geometric bubble it landed inside, and snaps it back to the center.
+                This specific spacing is what makes error correction a strict mathematical certainty rather than
+                a guessing game.
+            </p>
+
+            <h2 class="h2 mt-4">Clustered Errors and the Power of Polynomials</h2>
+            <p>
+                Simple linear codes are great for random bit flips. But they fail hard if errors happen all at
+                once. If a scratch wipes out $100$ bits in a row on a CD, checking bits one by one won't save
+                you. To beat these "burst errors," we need more math. We leave $\mathbb{F}_2$ and use larger
+                fields, like $\mathbb{F}_{2^8}$, where every element perfectly fits one byte of data.
+            </p>
+            <p>
+                This leads us to the <strong>Reed-Solomon Code</strong>. It relies on a rule we all know: any
+                $k$ distinct points uniquely pin down a polynomial of degree $k - 1$. Instead of just sending
+                $k$ bytes of a message, we treat those bytes as the coefficients of a polynomial $P(x)$. To send
+                the data, we plug in $n$ different points (where $n > k$) and send those answers. We are sending
+                way more points than needed. If a burst of noise ruins a bunch of them, it is okay. As long as
+                the receiver gets at least $k$ good points, they can use algebra to find the exact polynomial
+                $P(x)$ and get the original message back.
+            </p>
+
+            <h2 class="h2 mt-4">The Math Inside QR Codes</h2>
+            <p>
+                You actually use this polynomial math every day: it is exactly how QR codes work. Phone cameras
+                are often blurry and lighting is bad. QR codes survive this because they are packed with
+                Reed-Solomon points. If you make a QR code with the highest error correction, you can destroy up
+                to 30% of it, and it still scans perfectly. This is the trick behind those custom QR codes with
+                logos in the middle. The logo isn't a special feature; it is just intentional damage! You are
+                covering up a bunch of data points. But because the math behind it sent so many extra points,
+                your phone just treats the logo as a "burst error," does the algebra, and takes you to the link.
+                Coding theory shows that the abstract stuff we study &mdash; subspaces, null spaces, and finite
+                fields &mdash; isn't just for exams. It is the hidden framework that keeps our digital life
+                running smoothly.
+            </p>
+        </article>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+</body>
+
+</html>

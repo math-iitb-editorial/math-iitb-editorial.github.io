@@ -86,5 +86,13 @@
     "summary": "An interview with the Department General Secretary of the Mathematics department at IIT Bombay, discussing the role, its challenges, and contributions.",
     "thumbnail": "/assets/img/articles/dgsec-interview-thumb.jpg",
     "thumb_alt": "Department General Secretary Interview article thumbnail"
+  },
+  {
+    "title": "The Magic of Error-Correcting Codes",
+    "slug": "magic-of-error-correcting-codes",
+    "date": "2026-04-15",
+    "summary": "A gentle tour through coding theory, from repetition codes and Shannon's insight to Reed-Solomon codes and the math inside QR codes.",
+    "thumbnail": "/assets/img/articles/magic-of-error-correcting-codes-thumb.jpg",
+    "thumb_alt": "The Magic of Error-Correcting Codes article thumbnail"
   }
 ]
