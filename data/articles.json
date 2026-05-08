@@ -94,5 +94,21 @@
     "summary": "A gentle tour through coding theory, from repetition codes and Shannon's insight to Reed-Solomon codes and the math inside QR codes.",
     "thumbnail": "/assets/img/articles/magic-of-error-correcting-codes-thumb.jpg",
     "thumb_alt": "The Magic of Error-Correcting Codes article thumbnail"
+  },
+  {
+    "title": "Intersection of Mathematics and Artistry — A Study of M.C. Escher",
+    "slug": "escher-art",
+    "date": "2026-05-08",
+    "summary": "Exploring the intersection of mathematics and art through the works of M.C. Escher, from tessellations and polyhedra to hyperbolic space and visual paradoxes.",
+    "thumbnail": "/assets/img/articles/escher-art-thumb.jpg",
+    "thumb_alt": "M.C. Escher Art article thumbnail"
+  },
+  {
+    "title": "Philosophy of Mathematics",
+    "slug": "philosophy-of-mathematics",
+    "date": "2026-05-08",
+    "summary": "Exploring the deep connections between philosophy and mathematics across Vedic, Buddhist, Islamic, Jain, and Western traditions.",
+    "thumbnail": "/assets/img/articles/philosophy-of-mathematics-thumb.png",
+    "thumb_alt": "Philosophy of Mathematics article thumbnail"
   }
 ]
